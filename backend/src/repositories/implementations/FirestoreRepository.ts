@@ -6,10 +6,7 @@ class FirestoreRepository implements IRepository {
 
   constructor() {
     this.client = admin.initializeApp({
-      credential: admin.credential.cert(
-        // eslint-disable-next-line import/no-absolute-path
-        require('E:/Users/alexa/Documents/GCP/kittybox.json')
-      )
+      credential: admin.credential.applicationDefault()
     })
   }
 

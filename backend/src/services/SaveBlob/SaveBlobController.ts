@@ -9,6 +9,7 @@ export class SaveBlobController {
     request: Request,
     response: Response
   ): Promise<Response<any, Record<string, any>>> {
+    // @ts-ignore
     const { originalname, buffer, mimetype } = request?.file
 
     const { userId } = request.body

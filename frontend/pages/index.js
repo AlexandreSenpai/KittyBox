@@ -12,7 +12,7 @@ const IndexPage = ({ postsInformation }) => {
 }
 
 export async function getServerSideProps() {
-  const req = await axios.get("http://localhost:3333/list/posts")
+  const req = await axios.get(`${process.env.BACKEND_URL}/list/posts`)
   if (req.status === 200) {
     return {
       props: {

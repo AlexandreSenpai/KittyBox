@@ -47,8 +47,8 @@
   "scripts": {
     "dev": "set NODE_ENV=dev && tsnd --transpile-only --respawn --ignore-watch node_modules ./index.ts",
     "compile": "set NODE_ENV=prd && tsc -p .",
-    "build": "gcloud builds submit --tag gcr.io/whr-seguroseservicos-dev/odisseu-order-service",
-    "deploy": "gcloud run deploy --image gcr.io/whr-seguroseservicos-dev/odisseu-order-service",
+    "build": "gcloud builds submit --tag gcr.io/kittybox-324207/kitty-box-backend",
+    "deploy": "gcloud run deploy --image gcr.io/kittybox-324207/kitty-box-backend --allow-unauthenticated",
     "test": "set NODE_ENV=test && jest --coverage"
   }
 }
