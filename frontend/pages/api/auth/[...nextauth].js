@@ -8,21 +8,20 @@ import "firebase/firestore"
 const firestore = (
   firebase.apps[0] ??
   firebase.initializeApp({
-    apiKey: "AIzaSyB-dc-c1pXIA5mzTIkgQzlvjQ68jyzZE0Q",
-    authDomain: "kittybox-324207.firebaseapp.com",
-    projectId: "kittybox-324207",
-    storageBucket: "kittybox-324207.appspot.com",
-    messagingSenderId: "240830845951",
-    appId: "1:240830845951:web:603be53318d993e605cdca",
+    apiKey: process.env.NEXT_PUBLIC_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_APP_ID,
   })
 ).firestore()
 
 export default NextAuth({
   providers: [
     Providers.Google({
-      clientId:
-        "240830845951-p94obqsvuijvv2uroc1nvfuk0gqbqatb.apps.googleusercontent.com",
-      clientSecret: "rfzeVm_SfQk6trVn7WZdNExr",
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET,
     }),
   ],
   adapter: FirebaseAdapter(firestore),

@@ -11,13 +11,12 @@ function File() {
   const handlePreview = async (e) => {
     const file = e.target.files?.[0]
 
-    console.log(file)
     const formData = new FormData()
     formData.append("userId", userSession.id)
     formData.append("file", file)
 
     const submit = await axios.post(
-      "http://localhost:3333/create/blob",
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/create/blob`,
       formData
     )
     console.log(submit)
