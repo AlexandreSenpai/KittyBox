@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-  width: 8rem;
-  height: 8rem;
+  width: ${(props) => props.width || "8rem"};
+  height: ${(props) => props.height || "8rem"};
 `
 
 export const RoundedHolder = styled.div`

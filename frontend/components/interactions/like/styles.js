@@ -19,10 +19,5 @@ export const LikeIconUnselected = styled(FavoriteBorderIcon)`
 `
 
 export const LikeIconSelected = styled(FavoriteIcon)`
-  color: ${(props) => props.theme.hover};
-
-  :hover {
-    color: ${(props) => props.theme.complementary};
-    cursor: pointer;
-  }
+  color: ${(props) => props.theme.interactions.like};
 `

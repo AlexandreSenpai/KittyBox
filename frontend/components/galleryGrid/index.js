@@ -7,7 +7,14 @@ import { Column, Container, GridContainer } from "./styles"
 function GalleryGrid({ posts }) {
   const BlobCard = ({ post }) => {
     return post?.is_image ? (
-      <ImageCard key={post.id} src={post.src} dimensions={post.dimensions} />
+      <ImageCard
+        key={post.id}
+        src={post.src}
+        dimensions={post.dimensions}
+        author={post.author}
+        created_at={post.created_at}
+        title={post.name}
+      />
     ) : (
       <VideoCard key={post.id} src={post.src} />
     )

@@ -19,10 +19,5 @@ export const BookmarkUnselected = styled(BookmarkBorderIcon)`
 `
 
 export const BookmarkSelected = styled(BookmarkIcon)`
-  color: ${(props) => props.theme.hover};
-
-  :hover {
-    color: ${(props) => props.theme.complementary};
-    cursor: pointer;
-  }
+  color: #2e66a6;
 `

@@ -1,11 +1,14 @@
 import React from "react"
+import IconButton from "@material-ui/core/IconButton"
 
 import { BookmarkSelected, BookmarkUnselected, Container } from "./styles"
 
 function Bookmark() {
   return (
     <Container>
-      <BookmarkUnselected fontSize="large" color="inherit" />
+      <IconButton size="small">
+        <BookmarkUnselected fontSize="large" color="inherit" />
+      </IconButton>
     </Container>
   )
 }

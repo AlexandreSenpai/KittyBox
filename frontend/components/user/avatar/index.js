@@ -1,9 +1,9 @@
 import React from "react"
 import { Container, RoundedHolder, UserImage } from "./styles"
 
-const Avatar = ({ src }) => {
+const Avatar = ({ src, width, height }) => {
   return (
-    <Container>
+    <Container width={width} height={height}>
       <RoundedHolder>
         <UserImage
           src={
