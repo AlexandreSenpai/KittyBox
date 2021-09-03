@@ -1,5 +1,5 @@
 import { IRepository } from '../IRepository'
-import admin from 'firebase-admin'
+import admin, { firestore } from 'firebase-admin'
 
 class FirestoreRepository implements IRepository {
   private client: admin.app.App
@@ -32,18 +32,52 @@ class FirestoreRepository implements IRepository {
       .set(data)
   }
 
-  async list(): Promise<any> {
-    const query = await this.client
+  async list(offset: string): Promise<any> {
+    let query = this.client
       .firestore()
       .collection('posts')
-      .orderBy('created_at', 'asc')
-      .startAt(0)
-      .limit(30)
+      .orderBy('created_at', 'desc')
+
+    if (offset !== 'undefined') {
+      const lastDoc = await this.read({
+        collection: 'posts',
+        document: offset
+      })
+      query = query.startAfter(lastDoc.created_at)
+    }
+
+    const queryResult = await query.limit(60).get()
+
+    return {
+      per_page: queryResult.size,
+      posts: queryResult.docs.map((doc) => {
+        const data = doc.data()
+        return {
+          ...data,
+          created_at: `${data.created_at
+            .toDate()
+            .toDateString()} at ${data.created_at
+            .toDate()
+            .toLocaleTimeString()}`,
+          id: doc.id
+        }
+      })
+    }
+  }
+
+  async read(collectionReference: {
+    collection: string
+    document: string
+  }): Promise<firestore.DocumentData> {
+    const data = await this.client
+      .firestore()
+      .collection(collectionReference.collection)
+      .doc(collectionReference.document)
       .get()
 
     return {
-      per_page: query.size,
-      posts: query.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      ...data.data(),
+      id: data.id
     }
   }
 }

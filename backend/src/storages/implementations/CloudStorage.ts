@@ -16,6 +16,10 @@ export class CloudStorage implements IStorage {
     this.bucket = this.client.bucket(bucketName)
   }
 
+  read(): Promise<any> {
+    throw new Error('Method not implemented.')
+  }
+
   getBucketName(): string {
     return this.bucket.name
   }
@@ -24,18 +28,20 @@ export class CloudStorage implements IStorage {
     return this.client.apiEndpoint
   }
 
-  async save(fileName: string, buffer: Buffer): Promise<any> {
-    const blob = this.bucket.file(fileName)
-    const blobStream = blob.createWriteStream()
+  async save(fileName: string, buffer: Buffer) {
+    return new Promise((resolve, reject) => {
+      const blob = this.bucket.file(fileName)
+      const blobStream = blob.createWriteStream()
 
-    blobStream.on('error', (err) => {
-      console.log(err)
+      blobStream.on('error', (err) => {
+        reject(err)
+      })
+
+      blobStream.end(buffer)
+
+      blobStream.on('finish', () =>
+        resolve(`${this.client.apiEndpoint}/${this.bucket.name}/${fileName}`)
+      )
     })
-
-    blobStream.end(buffer)
-  }
-
-  async read(): Promise<any> {
-    throw new Error('Method not implemented.')
   }
 }

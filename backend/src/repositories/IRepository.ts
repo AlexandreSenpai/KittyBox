@@ -7,5 +7,9 @@ export interface IRepository {
     collectionReference: { collection: string; document: string },
     data: any
   ): Promise<any>
-  list(): Promise<any>
+  list(offset: string): Promise<any>
+  read(collectionReference: {
+    collection: string
+    document: string
+  }): Promise<any>
 }

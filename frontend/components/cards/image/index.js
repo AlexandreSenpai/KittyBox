@@ -1,4 +1,4 @@
-import React from "react"
+import React, { forwardRef } from "react"
 
 import Like from "../../interactions/like"
 import Bookmark from "../../interactions/bookmark"
@@ -18,9 +18,9 @@ import {
   PostTitle,
 } from "./styles"
 
-function ImageCard({ src, dimensions, author, created_at, title }) {
+function ImageCard({ src, dimensions, author, created_at, title }, ref) {
   return (
-    <Container>
+    <Container ref={ref}>
       <AuthorInformationHolder>
         <AuthorInformationWrapper>
           <Avatar src={author?.image} width={"5.5rem"} height={"5.5rem"} />
@@ -36,9 +36,10 @@ function ImageCard({ src, dimensions, author, created_at, title }) {
           src={src}
           width={dimensions.width}
           height={dimensions.height}
-          layout="responsive"
-          placeholder="blur"
           blurDataURL={src}
+          quality={100}
+          placeholder="blur"
+          layout="responsive"
         />
       </ImageHolder>
       <OptionsHolder>
@@ -50,4 +51,4 @@ function ImageCard({ src, dimensions, author, created_at, title }) {
   )
 }
 
-export default ImageCard
+export default forwardRef(ImageCard)

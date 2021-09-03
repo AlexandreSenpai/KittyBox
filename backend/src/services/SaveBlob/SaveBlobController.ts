@@ -23,7 +23,9 @@ export class SaveBlobController {
 
     try {
       const documentData = await this.saveBlobUseCase.execute(data)
-      return response.status(201).json(documentData)
+      return response.status(201).json({
+        postId: documentData
+      })
     } catch (err) {
       return response.status(500).send(err.stack)
     }

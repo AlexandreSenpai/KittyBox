@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useCallback, useContext, useEffect, useState } from "react"
 import Avatar from "../../user/avatar"
 import { signIn, signOut } from "next-auth/client"
 import { AuthContext } from "../../../contexts/auth"
@@ -20,6 +20,13 @@ import {
 
 const Sidebar = () => {
   const { userSession } = useContext(AuthContext)
+  const [currentPage, setCurrentPage] = useState("gallery")
+
+  const setPage = useCallback((targetPage) => {
+    setCurrentPage((prevPage) =>
+      prevPage === targetPage ? currentPage : targetPage
+    )
+  }, [])
 
   return (
     <Container>
@@ -32,16 +39,16 @@ const Sidebar = () => {
       </UserInformationHolder>
       <Divider />
       <List>
-        <ListItem>
-          <GalleryIcon fontSize={"large"} />
+        <ListItem onClick={() => setPage("gallery")}>
+          <GalleryIcon fontSize={"large"} currentPage={currentPage} />
           Gallery
         </ListItem>
-        <ListItem>
-          <BookmarkIcon fontSize={"large"} />
+        <ListItem onClick={() => setPage("bookmark")}>
+          <BookmarkIcon fontSize={"large"} currentPage={currentPage} />
           Bookmarks
         </ListItem>
-        <ListItem>
-          <ProfileIcon fontSize={"large"} />
+        <ListItem onClick={() => setPage("profile")}>
+          <ProfileIcon fontSize={"large"} currentPage={currentPage} />
           Profile
         </ListItem>
       </List>

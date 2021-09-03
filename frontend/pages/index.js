@@ -6,7 +6,11 @@ import axios from "axios"
 const IndexPage = ({ postsInformation }) => {
   return (
     <Layout title="KittyBox">
-      <GalleryGrid posts={postsInformation?.posts} />
+      <GalleryGrid
+        posts={postsInformation?.posts}
+        path={"/list/posts"}
+        paginate_mode="offset"
+      />
     </Layout>
   )
 }

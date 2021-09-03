@@ -63,12 +63,18 @@ export const Divider = styled.div`
 `
 
 export const ProfileIcon = styled(AccountBoxIcon)`
+  color: ${(props) =>
+    props.currentPage === "profile" ? props.theme.complementary : "inherit"};
   margin-right: 0.5rem;
 `
 export const GalleryIcon = styled(PhotoLibraryIcon)`
+  color: ${(props) =>
+    props.currentPage === "gallery" ? props.theme.complementary : "inherit"};
   margin-right: 0.5rem;
 `
 export const BookmarkIcon = styled(BookmarksIcon)`
+  color: ${(props) =>
+    props.currentPage === "bookmark" ? props.theme.complementary : "inherit"};
   margin-right: 0.5rem;
 `
 export const SessionButton = styled.button`
