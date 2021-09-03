@@ -37,7 +37,7 @@ function ImageCard({ src, dimensions, author, created_at, title }, ref) {
           width={dimensions.width}
           height={dimensions.height}
           blurDataURL={src}
-          quality={100}
+          quality={1}
           placeholder="blur"
           layout="responsive"
         />
